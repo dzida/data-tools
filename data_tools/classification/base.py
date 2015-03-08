@@ -7,8 +7,8 @@ class ClassificationAlgorithmBase(object):
     Provides interface that should be implemented by each classification algorithm.
     """
 
-    def train(self):
+    def train(self, training_data):
         raise NotImplementedError
 
-    def classify(self):
+    def classify(self, data):
         raise NotImplementedError

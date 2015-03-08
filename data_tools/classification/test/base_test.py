@@ -8,10 +8,10 @@ class BaseTests(TestCase):
     """ Tests suite for base ClassificationAlgorithm tests. """
 
     def test_train(self):
-        self.assertRaises(NotImplementedError, ClassificationAlgorithmBase().train)
+        self.assertRaises(NotImplementedError, ClassificationAlgorithmBase().train, None)
 
     def test_classify(self):
-        self.assertRaises(NotImplementedError, ClassificationAlgorithmBase().classify)
+        self.assertRaises(NotImplementedError, ClassificationAlgorithmBase().classify, None)
 
 
 
