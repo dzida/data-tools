@@ -37,7 +37,23 @@ class KNNClassificationAlgorithmTests(TestCase):
 
         self.assertTrue(knn.is_trained)
 
+    def test_on_training_data(self):
+        CLASS_1 = "A"
+        CLASS_2 = "B"
+        CLASS_3 = "C"
+        training_data = [
+            [-1, 1, CLASS_1],
+            [1, -1, CLASS_2],
+            [0, 0, CLASS_3]
+        ]
 
+        K = 1
+        knn = KNNClassificationAlgorithm(K)
+        knn.train(training_data)
+
+        self.assertEquals(knn.classify([-1, 1]), CLASS_1)
+        self.assertEquals(knn.classify([1, -1]), CLASS_2)
+        self.assertEquals(knn.classify([0, 0]), CLASS_3)
 
 if __name__ == "__main__":
     unittest_run()
