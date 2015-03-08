@@ -1,6 +1,6 @@
 # encoding: utf-8
 from data_tools.classification.base import ClassificationAlgorithmBase
-from data_tools.math.metrics import euclidean
+from data_tools.math.distance import euclidean
 
 
 class KNNClassificationAlgorithm(ClassificationAlgorithmBase):
