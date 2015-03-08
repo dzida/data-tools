@@ -1,8 +1,6 @@
 # encoding: utf-8
 from functools import wraps
 
-from numpy import linalg, array
-
 
 def assert_same_length(fn):
     """ Decorator that checks if given two vectors for distance calculation have the same length.
@@ -22,10 +20,8 @@ def euclidean(v1, v2):
     """ Computes euclidean distance between two points.
 
     http://en.wikipedia.org/wiki/Euclidean_distance
-
-    Uses numpy's linalg.norm.
     """
-    return linalg.norm(array(v1) - array(v2))
+    return sum((v[0] - v[1])**2 for v in zip(v1, v2)) ** 0.5
 
 
 @assert_same_length
