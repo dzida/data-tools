@@ -44,3 +44,12 @@ def canberra(v1, v2):
     http://en.wikipedia.org/wiki/Canberra_distance
     """
     return sum(( (abs(v[0] - v[1]) / (abs(v[0] + abs(v[1])))) for v in zip(v1, v2)))
+
+
+@assert_same_length
+def chebyshev(v1, v2):
+    """ Computes Chebyshev distance between two points.
+
+    http://en.wikipedia.org/wiki/Chebyshev_distance
+    """
+    return max((abs(v[0] - v[1]) for v in zip(v1, v2)))
