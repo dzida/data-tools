@@ -2,10 +2,14 @@
 from unittest import TestCase, main as unittest_run
 
 from data_tools.classification.knn import KNNClassificationAlgorithm
+from data_tools.data.training_data import TrainingData
 
 
 class KNNClassificationAlgorithmTests(TestCase):
     """ Tests suite for base ClassificationAlgorithm tests. """
+
+    def setUp(self):
+        self.TRAINING_DATA = TrainingData([[1, 0], [0, 2], [3, 4]], ["A", "B", "C"])
 
     def test_k_1(self):
         K = 100
@@ -18,42 +22,31 @@ class KNNClassificationAlgorithmTests(TestCase):
         self.assertRaises(ValueError, knn.classify, None)
 
     def test_is_trained(self):
-        TRAINING_DATA = [1, 2]
         knn = KNNClassificationAlgorithm(1)
-        knn.train(TRAINING_DATA)
+        knn.train(self.TRAINING_DATA)
         self.assertTrue(knn.is_trained)
 
     def test_k_is_greater_than_number_of_samples(self):
-        K = 5
-        training_data = [i for i in xrange(K - 1)]
+        K = self.TRAINING_DATA.samples_count + 1
         knn = KNNClassificationAlgorithm(K)
-        self.assertRaises(ValueError, knn.train, training_data)
+        self.assertRaises(ValueError, knn.train, self.TRAINING_DATA)
 
     def test_k_is_equal_number_of_samples(self):
-        K = 5
-        training_data = [i for i in xrange(K)]
+        K = self.TRAINING_DATA.samples_count
         knn = KNNClassificationAlgorithm(K)
-        knn.train(training_data)
+        knn.train(self.TRAINING_DATA)
 
         self.assertTrue(knn.is_trained)
 
-    def test_on_training_data(self):
-        CLASS_1 = "A"
-        CLASS_2 = "B"
-        CLASS_3 = "C"
-        training_data = [
-            [-1, 1, CLASS_1],
-            [1, -1, CLASS_2],
-            [0, 0, CLASS_3]
-        ]
-
+    def test_on_training_data_k1(self):
         K = 1
         knn = KNNClassificationAlgorithm(K)
-        knn.train(training_data)
+        knn.train(self.TRAINING_DATA)
 
-        self.assertEquals(knn.classify([-1, 1]), CLASS_1)
-        self.assertEquals(knn.classify([1, -1]), CLASS_2)
-        self.assertEquals(knn.classify([0, 0]), CLASS_3)
+        self.assertEquals(knn.classify(self.TRAINING_DATA.samples[0]), self.TRAINING_DATA.classes[0])
+        self.assertEquals(knn.classify(self.TRAINING_DATA.samples[1]), self.TRAINING_DATA.classes[1])
+        self.assertEquals(knn.classify(self.TRAINING_DATA.samples[2]), self.TRAINING_DATA.classes[2])
+
 
 if __name__ == "__main__":
     unittest_run()

@@ -15,7 +15,7 @@ class KNNClassificationAlgorithm(ClassificationAlgorithmBase):
         return self._training_data is not None
 
     def train(self, training_data):
-        if len(training_data) < self.k:
+        if training_data.samples_count < self.k:
             raise ValueError("k should be lesser or equal than number of samples in training data")
 
         # just store training data
@@ -41,9 +41,9 @@ class KNNClassificationAlgorithm(ClassificationAlgorithmBase):
             raise ValueError("Cannot classify on not trained classifier")
 
         distances = []
-        for training_sample in self._training_data:
-            distance = self._calculate_distance(training_sample[:-1], data)
-            sample_class = training_sample[-1]
+        for i, sample in enumerate(self._training_data.samples):
+            distance = self._calculate_distance(sample, data)
+            sample_class = self._training_data.classes[i]
             distances.append((distance, sample_class))
             # reverse sort after append
             distances = sorted(distances, key=lambda x: x[0])

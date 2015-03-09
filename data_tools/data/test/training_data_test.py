@@ -51,5 +51,6 @@ class TrainingDataTests(TestCase):
         td = TrainingData(self.SAMPLES, self.CLASSES)
         self.assertEquals(td.distinct_classes, self.DISTINCT_CLASSES)
 
+    # TODO: create from numpy
 if __name__ == "__main__":
     unittest_run()
