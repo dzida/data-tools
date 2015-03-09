@@ -13,7 +13,9 @@ class TrainingData(object):
         if not classes:
             raise ValueError("Cannot initialize TrainingData with empty classes")
 
-        if len(samples) != len(classes):
+        self._samples_count = len(samples)
+        self._classes_count = len(classes)
+        if self.samples_count != self._classes_count:
             raise ValueError("Cannot initialize TrainingData with samples set not matching classes set length")
 
         self._dimensions_count = len(samples[0])
@@ -26,7 +28,7 @@ class TrainingData(object):
     @property
     def samples_count(self):
         """ Returns number of samples in training data set. """
-        return len(self.samples)
+        return self._samples_count
 
     @property
     def dimensions_count(self):
@@ -39,6 +41,6 @@ class TrainingData(object):
         return list(set(self.classes))
 
     @property
-    def classes_count(self):
+    def distinct_classes_count(self):
         """ Returns number of distinct classes. """
         return len(self.distinct_classes)

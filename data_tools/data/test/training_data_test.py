@@ -43,9 +43,9 @@ class TrainingDataTests(TestCase):
         td = TrainingData(self.SAMPLES, self.CLASSES)
         self.assertEquals(td.dimensions_count, self.DIMENSIONS_COUNT)
 
-    def test_classes_count(self):
+    def test_distinct_classes_count(self):
         td = TrainingData(self.SAMPLES, self.CLASSES)
-        self.assertEquals(td.classes_count, self.CLASSES_COUNT)
+        self.assertEquals(td.distinct_classes_count, self.CLASSES_COUNT)
 
     def test_distinct_classes(self):
         td = TrainingData(self.SAMPLES, self.CLASSES)
