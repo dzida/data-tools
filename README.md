@@ -6,7 +6,7 @@ Main focus is put on classification algorithms at this moment.
 
 Dependencies
 ------------
-Project is implemented in Python 2.7.
+Project is implemented using Python 2.7.
 Project does not require any external modules.
 
 Attribution
