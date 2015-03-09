@@ -6,6 +6,8 @@ class TrainingData(object):
 
     Holds training data structures and provides helpers for describing training data set.
     """
+    _distinct_classes = None
+
     def __init__(self, samples, classes):
         if not samples:
             raise ValueError("Cannot initialize TrainingData with empty samples")
@@ -38,7 +40,9 @@ class TrainingData(object):
     @property
     def distinct_classes(self):
         """ Returns list of distinct class names. """
-        return list(set(self.classes))
+        if self._distinct_classes is None:
+            self._distinct_classes = list(set(self.classes))
+        return self._distinct_classes
 
     @property
     def distinct_classes_count(self):
