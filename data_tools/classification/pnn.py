@@ -24,23 +24,26 @@ class ProbabilisticNeuralNetwork(ClassificationAlgorithmBase):
         sum_layer = dict()
 
         for class_ in self._training_data.distinct_classes:
-            sum_layer[class_] = 0.0
-            for j, sample in enumerate(self._training_data.samples):
-                if self._training_data.classes[j] == class_:
-                    p = euclidean(self._training_data.samples[j], data) ** 2
-                    sum_layer[class_] += exp(p / self._minus_variance)
+            sum_layer[class_] = dict(score=0, count=0)
 
-            sum_layer[class_] /= self._training_data.samples_count
+        for i, sample in enumerate(self._training_data.samples):
+            sample_class = self._training_data.classes[i]
+            p = euclidean(self._training_data.samples[i], data) ** 2
+            sum_layer[sample_class]["score"] += exp(p / self._minus_variance)
+            sum_layer[sample_class]["count"] += 1
+
+        for s in sum_layer:
+            sum_layer[s] = sum_layer[s]["score"] / sum_layer[s]["count"]
 
         # normalize
         total = sum(sum_layer.values())
-        for s in sum_layer:
-            sum_layer[s] /= total
 
         # output layer - select class
         selected = None
         largest = -1
         for s in sum_layer:
+            # normalize
+            sum_layer[s] /= total
             if sum_layer[s] > largest:
                 largest = sum_layer[s]
                 selected = s

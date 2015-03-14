@@ -12,11 +12,11 @@ class ProbabilisticNeuralNetworkClassificationAlgorithmTests(TestCase):
         self.TRAINING_DATA = TrainingData([[1, 0], [0, 2], [3, 4]], ["A", "B", "C"])
 
     def test_sigma(self):
-        sigma = 1
-        pnn = ProbabilisticNeuralNetwork(sigma)
-        self.assertEquals(pnn.sigma, sigma)
+        SIGMA = 1
+        pnn = ProbabilisticNeuralNetwork(SIGMA)
+        self.assertEquals(pnn.sigma, SIGMA)
 
-    def test_is_trained(self):
+    def test_not_trained(self):
         SIGMA = 1
         pnn = ProbabilisticNeuralNetwork(SIGMA)
         self.assertFalse(pnn.is_trained)
