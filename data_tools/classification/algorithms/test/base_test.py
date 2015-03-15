@@ -1,7 +1,7 @@
 # encoding: utf-8
 from unittest import TestCase, main as unittest_run
 
-from data_tools.classification.base import ClassificationAlgorithmBase
+from data_tools.classification.algorithms.base import ClassificationAlgorithmBase
 
 
 class BaseTests(TestCase):

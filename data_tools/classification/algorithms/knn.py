@@ -1,5 +1,5 @@
 # encoding: utf-8
-from data_tools.classification.base import ClassificationAlgorithmBase
+from data_tools.classification.algorithms.base import ClassificationAlgorithmBase
 from data_tools.math.distance import euclidean
 
 

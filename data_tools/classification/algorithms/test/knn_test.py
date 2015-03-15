@@ -1,8 +1,8 @@
 # encoding: utf-8
 from unittest import TestCase, main as unittest_run
 
-from data_tools.classification.knn import KNearestNeighbour
-from data_tools.data.training_data import TrainingData
+from data_tools.classification.algorithms.knn import KNearestNeighbour
+from data_tools.classification.datastructures.training_data import TrainingData
 
 
 class KNNClassificationAlgorithmTests(TestCase):
