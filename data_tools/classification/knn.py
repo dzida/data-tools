@@ -3,7 +3,7 @@ from data_tools.classification.base import ClassificationAlgorithmBase
 from data_tools.math.distance import euclidean
 
 
-class KNNClassificationAlgorithm(ClassificationAlgorithmBase):
+class KNearestNeighbour(ClassificationAlgorithmBase):
 
     def __init__(self, k, metric=euclidean):
         self.k = k
