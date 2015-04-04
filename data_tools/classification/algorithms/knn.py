@@ -30,13 +30,16 @@ class KNearestNeighbour(ClassificationAlgorithmBase):
         for i, sample in enumerate(self._training_data.samples):
             distance = self._calculate_distance(sample, data)
             sample_class = self._training_data.classes[i]
-            distances.append((distance, sample_class))
+            distances.append((sample_class, distance))
             # reverse sort after append
-            distances = sorted(distances, key=lambda x: x[0])
+            distances = sorted(distances, key=lambda x: x[1])
             # trim to k
             distances = distances[:self.k]
 
-        results = {x[1]: x[0] for x in distances}
+        # construct classification results
+        results = {class_: 0.0 for class_ in self._training_data.distinct_classes}
+        for class_, distance in distances:
+            results[class_] += 1.0
 
         return ClassificationResults(results)
 

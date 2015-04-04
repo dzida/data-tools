@@ -47,6 +47,15 @@ class KNNClassificationAlgorithmTests(TestCase):
         self.assertEquals(knn.classify(self.TRAINING_DATA.samples[1]).selected_class, self.TRAINING_DATA.classes[1])
         self.assertEquals(knn.classify(self.TRAINING_DATA.samples[2]).selected_class, self.TRAINING_DATA.classes[2])
 
+    def test_results_has_all_classes(self):
+        K = 1
+        knn = KNearestNeighbour(K)
+        knn.train(self.TRAINING_DATA)
+
+        classification_results = knn.classify(self.TRAINING_DATA.samples[0])
+        self.assertTrue(self.TRAINING_DATA.classes[1] in classification_results.results)
+        self.assertTrue(self.TRAINING_DATA.classes[2] in classification_results.results)
+
 
 if __name__ == "__main__":
     unittest_run()

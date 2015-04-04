@@ -11,4 +11,8 @@ class ClassificationAlgorithmBase(object):
         raise NotImplementedError
 
     def classify(self, data):
+        """ To be implemented in child classes.
+
+        Should return ClassificationResults instance.
+        """
         raise NotImplementedError

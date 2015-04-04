@@ -5,8 +5,17 @@ class ClassificationResults(object):
     """ Wrapper class for classification results data. """
 
     def __init__(self, results):
-        # store sorted results
-        self._sorted_results = sorted([(k, v) for k, v in results.iteritems()], key=lambda x: -1 * x[1])
+        self._results = results
+        self._sorted_results = sorted(
+            [
+                (k, v) for k, v in results.iteritems()
+                if v is not None
+            ],
+            key=lambda x: -1.0 * x[1])
+
+    @property
+    def results(self):
+        return self._results
 
     @property
     def selected_class(self):
