@@ -1,6 +1,7 @@
 # encoding: utf-8
 from data_tools.classification.algorithms.base import ClassificationAlgorithmBase
 from data_tools.math.distance import euclidean
+from data_tools.classification.datastructures.classification_results import ClassificationResults
 
 
 class KNearestNeighbour(ClassificationAlgorithmBase):
@@ -21,21 +22,6 @@ class KNearestNeighbour(ClassificationAlgorithmBase):
         # just store training data
         self._training_data = training_data
 
-    def _select_winner(self, distances):
-        results = dict()
-        the_best = -1
-        winner = None
-
-        for distance, class_ in distances:
-            if class_ not in results:
-                results[class_] = 0
-            else:
-                results[class_] += 1
-
-            if results[class_] > the_best:
-                winner = class_
-        return winner
-
     def classify(self, data):
         if not self.is_trained:
             raise ValueError("Cannot classify on not trained classifier")
@@ -50,5 +36,7 @@ class KNearestNeighbour(ClassificationAlgorithmBase):
             # trim to k
             distances = distances[:self.k]
 
-        return self._select_winner(distances)
+        results = {x[1]: x[0] for x in distances}
+
+        return ClassificationResults(results)
 

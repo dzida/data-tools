@@ -2,6 +2,7 @@
 from math import exp
 
 from data_tools.classification.algorithms.base import ClassificationAlgorithmBase
+from data_tools.classification.datastructures.classification_results import ClassificationResults
 from data_tools.math.distance import euclidean
 
 
@@ -44,8 +45,5 @@ class ProbabilisticNeuralNetwork(ClassificationAlgorithmBase):
         for s in sum_layer:
             # normalize
             sum_layer[s] /= total
-            if sum_layer[s] > largest:
-                largest = sum_layer[s]
-                selected = s
 
-        return selected
+        return ClassificationResults(sum_layer)

@@ -32,9 +32,9 @@ class ProbabilisticNeuralNetworkClassificationAlgorithmTests(TestCase):
         pnn = ProbabilisticNeuralNetwork(SIGMA)
         pnn.train(self.TRAINING_DATA)
 
-        self.assertEquals(pnn.classify(self.TRAINING_DATA.samples[0]), self.TRAINING_DATA.classes[0])
-        self.assertEquals(pnn.classify(self.TRAINING_DATA.samples[1]), self.TRAINING_DATA.classes[1])
-        self.assertEquals(pnn.classify(self.TRAINING_DATA.samples[2]), self.TRAINING_DATA.classes[2])
+        self.assertEquals(pnn.classify(self.TRAINING_DATA.samples[0]).selected_class, self.TRAINING_DATA.classes[0])
+        self.assertEquals(pnn.classify(self.TRAINING_DATA.samples[1]).selected_class, self.TRAINING_DATA.classes[1])
+        self.assertEquals(pnn.classify(self.TRAINING_DATA.samples[2]).selected_class, self.TRAINING_DATA.classes[2])
 
 
 if __name__ == "__main__":
